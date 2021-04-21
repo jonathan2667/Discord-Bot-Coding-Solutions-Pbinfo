@@ -1,11 +1,13 @@
 import discord
 import datetime
-
+import os.path
+from os import path
 
 weekday = datetime.datetime.today().weekday()
 hour = datetime.datetime.today().hour 
-# hour += 3
+hour += 3
 
+emoji = '\N{THUMBS UP SIGN}'
 
 constanta = 8
 
@@ -56,7 +58,13 @@ async def on_message(message):
     ('Hatzzz johnule')
 
   if 'boss' in message.content or 'master' in message.content:
-    await message.channel.send('Seful meu este john')
+    await message.channel.send('Creatorul meu este john')
+
+  if 'destept' in message.content or 'intelept' in message.content:
+    await message.reply('Multumesc!', mention_author=False)
+
+  if 'mersi' in message.content or 'ms' in message.content:
+    await message.add_reaction(emoji)
 
   if message.content.startswith('!calc'):
     str = message.content[5: len(message.content)]
@@ -64,9 +72,19 @@ async def on_message(message):
     await message.channel.send(answ)
 
   if message.content == '!comands' or message.content == '!help' :
-    str = '```fix\nEverything is yellow in fix\n --No matter the line!```'
+    str = '```fix\n!comands\n!help\n!plz\n!calc\n!orar\n!ora vit\n!ora vitore\n!master\n!boss\n!hatz\n!ora curenta```'
     await message.channel.send(str)
 
+  if message.content.startswith('!plz'):
+    number = ''
+    for i in range(4, len(message.content)):
+      if message.content[i].isdigit():
+        number += message.content[i] 
+    name = number + '.txt'
+    if path.exists(name):
+      await message.channel.send(file=discord.File(name))
+    else:
+      await message.channel.send("Scuze, nu am aceasta problema, sau aceasta problema nu exista. Insa poate Creatorul meu o detine!")
 
   if message.content == '!orar':
     await message.channel.send(file=discord.File('orar.jpg'))
@@ -97,4 +115,4 @@ async def on_message(message):
 
 
 
-client.run('ODM0MzgzMDI5MjE2NjA4Mjg4.YIAFwA._mofjESAQOZyuVdGWMyJNlauDX8')
+client.run('ODM0MzgzMDI5MjE2NjA4Mjg4.YIAFwA.75jfecPgwBw4ksZZSRyYTMMmboE')
